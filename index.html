@@ -38,148 +38,126 @@ hr{border:none;border-top:1px solid #eee;margin:1.5rem 0}
   <h1>DL & WN automation rate drop</h1>
   <span class="tag tb">Amadeus GDS TK · Flights · Jun 25 – Jun 26</span>
 </div>
-<p class="sub">Flight modification automation failures across 3 Lookers. Filters: manage_trip_form · Modification · amadeus_gds_tk · not excluded from model.</p>
+<p class="sub">Data source: Snowflake · TK_BACKEND.FLIGHT_MODIFICATION + TDA_DRIVER_COMPLETE_MODIFICATION · amadeus_gds_tk · DL + WN · Jun 2025 – Jun 2026. <strong>Updated Jun 2026 — verified counts. Previous chart-based estimates replaced.</strong></p>
 
-<div class="sl">Key metrics</div>
+<div style="background:#FFF8E6;border:1px solid #F0D080;border-radius:8px;padding:10px 14px;margin-bottom:1rem;font-size:12px;color:#6B4B00"><strong>⚠️ Correction notice:</strong> Previous version was based on chart screenshot estimates. This version uses verified Snowflake counts. Key corrections: INVALID RV was NOT 32/month (actual: 2 cases total). WN ETKT unused coupons was NOT 11/month (actual: 5 cases total). The dominant WN error (CMC RJT: NEED COMMISSION, 20–32/month) was previously missing entirely.</div>
+
+<div class="sl">Key metrics — Snowflake verified</div>
 <div class="grid4">
-  <div class="mc"><div class="ml">Highest single error (DL)</div><div class="mv" style="color:#A32D2D">32</div><div class="ms">INVALID RV · Feb+Mar 26</div></div>
-  <div class="mc"><div class="ml">Most sustained error (DL)</div><div class="mv" style="color:#A32D2D">~17/mo</div><div class="ms">Multiple Exchange · all year</div></div>
-  <div class="mc"><div class="ml">Highest WN error</div><div class="mv" style="color:#854F0B">18</div><div class="ms">866 No fare · May 26</div></div>
-  <div class="mc"><div class="ml">E-ticket 24360 peak (DL)</div><div class="mv" style="color:#854F0B">34</div><div class="ms">May 26 · improving Jun</div></div>
+  <div class="mc"><div class="ml">Biggest DL spike 2026</div><div class="mv" style="color:#A32D2D">29</div><div class="ms">Session/PNR errors · Apr 26</div></div>
+  <div class="mc"><div class="ml">DL Internal Server Error</div><div class="mv" style="color:#A32D2D">17</div><div class="ms">Ticketing step · Apr 26 peak</div></div>
+  <div class="mc"><div class="ml">Dominant WN error (resolved?)</div><div class="mv" style="color:#185FA5">32</div><div class="ms">CMC Commission · Jan 26 · 0 since May</div></div>
+  <div class="mc"><div class="ml">Multiple Exchange (DL)</div><div class="mv" style="color:#854F0B">3</div><div class="ms">Chronic · Jun 26 · confirmed</div></div>
 </div>
 
 <hr>
-<div class="sl">Monthly volume — key errors</div>
+<div class="sl">Monthly volume — key errors (Snowflake verified)</div>
 <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px">
-  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#7F77DD;display:inline-block;border-radius:2px"></span>E-ticket 24360 (DL)</span>
-  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#E24B4A;display:inline-block;border-radius:2px"></span>Multiple Exchange (DL)</span>
-  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#BA7517;display:inline-block;border-radius:2px"></span>INVALID RV (DL)</span>
-  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#D85A30;display:inline-block;border-radius:2px"></span>Repricing mismatch (DL)</span>
-  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#378ADD;display:inline-block;border-radius:2px"></span>Ticketing unsuccessful (DL)</span>
-  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#1D9E75;display:inline-block;border-radius:2px"></span>866 No fare (WN)</span>
+  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#E24B4A;display:inline-block;border-radius:2px"></span>Session/PNR errors (DL)</span>
+  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#7F77DD;display:inline-block;border-radius:2px"></span>Internal Server Error (DL)</span>
+  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#D85A30;display:inline-block;border-radius:2px"></span>TTM INHIBITED (DL)</span>
+  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#BA7517;display:inline-block;border-radius:2px"></span>Multiple Exchange (DL)</span>
+  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#1D9E75;display:inline-block;border-radius:2px"></span>CMC Commission (WN)</span>
+  <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666"><span style="width:12px;height:3px;background:#378ADD;display:inline-block;border-radius:2px"></span>Pnr parallel process (WN)</span>
 </div>
 <div style="position:relative;width:100%;height:280px;margin-bottom:1.5rem">
   <canvas id="errChart"></canvas>
 </div>
 
 <hr>
-<div class="sl">All errors — verified from Looker data</div>
+<div class="sl">All errors — Snowflake verified counts</div>
 <div class="card">
   <div style="display:grid;grid-template-columns:2fr 70px 90px 80px 1fr;gap:8px;padding-bottom:8px;border-bottom:1px solid #f0f0ee;margin-bottom:4px">
     <span style="font-size:11px;color:#999;font-weight:600">Full error name</span>
     <span style="font-size:11px;color:#999;font-weight:600">Airline</span>
     <span style="font-size:11px;color:#999;font-weight:600">Step</span>
     <span style="font-size:11px;color:#999;font-weight:600">Status</span>
-    <span style="font-size:11px;color:#999;font-weight:600">Trend</span>
+    <span style="font-size:11px;color:#999;font-weight:600">Trend (Snowflake)</span>
   </div>
 
   <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">MULTIPLE EXCHANGE/ISSUANCE NOT AUTHORIZED — USE TST/TSM SELECT</div><div style="font-size:12px;color:#666">Ticketing rejects reissuance — TST/TSM selection logic issue in DocIssuance</div></div>
+    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">Session/PNR state errors (TTM INHIBITED · FINISH OR IGNORE · Pnr parallel process)</div><div style="font-size:12px;color:#666">DL: open Amadeus session or PNR state conflict at ticketing — confirmed via service logs (trip 38831066)</div></div>
+    <div style="width:70px"><span class="tag tpu">DL</span></div>
+    <div style="width:90px"><span class="st">L3 · Ticketing</span></div>
+    <div style="width:80px"><span class="tag tr">🔴 Spiking</span></div>
+    <div style="flex:1;font-size:12px;color:#A32D2D">Baseline 2–5/mo → Apr 26 spike: 29 → May: 20 → Jun: 12. Root cause unconfirmed — needs Datadog.</div>
+  </div>
+
+  <div class="er">
+    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">Ticketing was unsuccessful — unable to issue the tickets (Internal Server Error)</div><div style="font-size:12px;color:#666">TDA fails before DocIssuance_IssueTicket is called — confirmed: no DocIssuance log found for affected trips</div></div>
+    <div style="width:70px"><span class="tag tpu">DL</span></div>
+    <div style="width:90px"><span class="st">L3 · Ticketing</span></div>
+    <div style="width:80px"><span class="tag tr">🔴 Spiking</span></div>
+    <div style="flex:1;font-size:12px;color:#A32D2D">Zero until Feb 26 → Feb: 7 → Mar: 12 → Apr peak: 17 → May: 2 → Jun: 1. Appears resolved but root cause unknown.</div>
+  </div>
+
+  <div class="er">
+    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">TTM INHIBITED — PNR_RetrieveAndDisplay returns inhibited status</div><div style="font-size:12px;color:#666">DL ticketing step blocked — Amadeus TTM inhibited flag on PNR, precedes DocIssuance</div></div>
+    <div style="width:70px"><span class="tag tpu">DL</span></div>
+    <div style="width:90px"><span class="st">L3 · Ticketing</span></div>
+    <div style="width:80px"><span class="tag ta">🟠 Growing</span></div>
+    <div style="flex:1;font-size:12px;color:#854F0B">Intermittent Jun–Dec 25 → growth Jan 26: 7 → May: 10 → Jun: 3. Still active.</div>
+  </div>
+
+  <div class="er">
+    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">MULTIPLE EXCHANGE/ISSUANCE NOT AUTHORIZED — USE TST/TSM SELECT</div><div style="font-size:12px;color:#666">Ticketing rejects reissuance — confirmed via service log DocIssuance_IssueTicket (trips 38345465, 39204028)</div></div>
     <div style="width:70px"><span class="tag tpu">DL</span></div>
     <div style="width:90px"><span class="st">L3 · Ticketing</span></div>
     <div style="width:80px"><span class="tag tr">🔴 Chronic</span></div>
-    <div style="flex:1;font-size:12px;color:#A32D2D">All year · peaks Jan 26 (27) & Mar (28) · returned May (23) · never resolved</div>
+    <div style="flex:1;font-size:12px;color:#A32D2D">Chronic all year · low volume but never zero · Jun 26: 3. Confirmed root cause: TST/TSM selection in DocIssuance.</div>
   </div>
 
   <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">INVALID RV — NO RESIDUAL VALUE</div><div style="font-size:12px;color:#666">Exchange finds no residual fare value — ticket exchange logic failure</div></div>
+    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">INVALID RV — NO RESIDUAL VALUE</div><div style="font-size:12px;color:#666">Exchange finds no residual fare value — confirmed via service log (PNR CLJBMX, trip 40247823)</div></div>
     <div style="width:70px"><span class="tag tpu">DL</span></div>
     <div style="width:90px"><span class="st">L3 · Ticketing</span></div>
-    <div style="width:80px"><span class="tag ta">🟠 Improving</span></div>
-    <div style="flex:1;font-size:12px;color:#854F0B">Zero until Jan 26 → Feb 32 → Mar 32 → declining Jun (12). New issue from Jan 26.</div>
+    <div style="width:80px"><span class="tag tb">🔵 Minor</span></div>
+    <div style="flex:1;font-size:12px;color:#185FA5">Only 2 confirmed cases total (1 in Oct 25, 1 in Jun 26). Previously reported as 32/month — that was incorrect.</div>
   </div>
 
   <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">Ticketing was unsuccessful — unable to issue the tickets</div><div style="font-size:12px;color:#666">Generic DocIssuance_IssueTicket failure — covers multiple root causes</div></div>
-    <div style="width:70px"><span class="tag tpu">DL</span></div>
+    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">CMC RJT: COMMISSION NOT VALIDATED (error 6709)</div><div style="font-size:12px;color:#666">WN DocIssuance_IssueTicket rejects — commission not validated. Dominant WN error. Confirmed via service log (trip 41208581).</div></div>
+    <div style="width:70px"><span class="tag twn">WN</span></div>
     <div style="width:90px"><span class="st">L3 · Ticketing</span></div>
-    <div style="width:80px"><span class="tag tr">🔴 Chronic</span></div>
-    <div style="flex:1;font-size:12px;color:#A32D2D">Persistent all year · Nov & Jan peaks (17) · rising again Apr–May (16) · never zero</div>
+    <div style="width:80px"><span class="tag tg">🟢 Resolved?</span></div>
+    <div style="flex:1;font-size:12px;color:#3B6D11">20–32/mo Jun 25–Mar 26 → Apr: 4 → May–Jun: 0. Previously missing from analysis. 276 cases total. No confirmed fix deployment found.</div>
   </div>
 
   <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">WARNING: UNABLE TO DISPLAY E-TICKET code:24360 type:W sub_errors:None</div><div style="font-size:12px;color:#666">E-ticket display failure at ticketing — 8 months sustained high volume</div></div>
-    <div style="width:70px"><span class="tag tpu">DL</span></div>
-    <div style="width:90px"><span class="st">L1 · Ticketing</span></div>
-    <div style="width:80px"><span class="tag ta">🟠 Recovering?</span></div>
-    <div style="flex:1;font-size:12px;color:#854F0B">Oct surge (19) → plateau → peak May (34) → Jun drop (9). Fix unconfirmed.</div>
-  </div>
-
-  <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">Repricing does not match price</div><div style="font-size:12px;color:#666">Price at Ticket_RebookAndRepricePNR differs from cached offer</div></div>
-    <div style="width:70px"><span class="tag tpu">DL</span></div>
-    <div style="width:90px"><span class="st">L1 · Rebook</span></div>
-    <div style="width:80px"><span class="tag tg">🟢 Improving</span></div>
-    <div style="flex:1;font-size:12px;color:#3B6D11">Dec surge (16) → peak Mar (25) → clear decline Apr (13) → May (8) → Jun (6)</div>
-  </div>
-
-  <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">866 — NO FARE FOUND FOR REQUESTED ITINERARY</div><div style="font-size:12px;color:#666">ATCShopperMasterPricerTravelBoardSearch returns no fares — inventory step fails</div></div>
-    <div style="width:70px"><span class="tag twn">WN &gt; DL</span></div>
-    <div style="width:90px"><span class="st">L1+L2 · Inventory</span></div>
-    <div style="width:80px"><span class="tag ta">🟠 WN recov.</span></div>
-    <div style="flex:1;font-size:12px;color:#854F0B">WN: spike Apr (16), May (18) → Jun drop (5). DL: Apr (12) → Jun (9), not recovering.</div>
+    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">Session/PNR state errors (FINISH OR IGNORE · Pnr updated by parallel process)</div><div style="font-size:12px;color:#666">WN PNR state conflict — FINISH OR IGNORE growing to 17 in Jun 26. Root cause: open Amadeus session from prior step.</div></div>
+    <div style="width:70px"><span class="tag twn">WN</span></div>
+    <div style="width:90px"><span class="st">L3 · Ticketing</span></div>
+    <div style="width:80px"><span class="tag tr">🔴 Growing</span></div>
+    <div style="flex:1;font-size:12px;color:#A32D2D">FINISH OR IGNORE: 1–5/mo → Jun 26: 17. Pnr parallel: 0 until Feb 26 → Jun: 9. Both growing. Root cause unconfirmed.</div>
   </div>
 
   <div class="er">
     <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">WN ETKT: EXCHANGE/REISSUE MUST INCLUDE ALL UNUSED COUPONS</div><div style="font-size:12px;color:#666">WN reissue rejected — unused coupons not included at ticketing step</div></div>
     <div style="width:70px"><span class="tag twn">WN</span></div>
     <div style="width:90px"><span class="st">L3 · Ticketing</span></div>
-    <div style="width:80px"><span class="tag ta">🟠 Growing</span></div>
-    <div style="flex:1;font-size:12px;color:#854F0B">Gradual increase all year · peak Apr (11) · slight drop May–Jun (6, 3)</div>
-  </div>
-
-  <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">WARNING: SEGMENT SELL FAILURE code:34651 type:E sub_errors:None</div><div style="font-size:12px;color:#666">Airline denies segment sell at Ticket_RebookAndRepricePNR</div></div>
-    <div style="width:70px"><span class="tag tpu">DL</span></div>
-    <div style="width:90px"><span class="st">L1 · Rebook</span></div>
-    <div style="width:80px"><span class="tag ta">🟠 Slow decl.</span></div>
-    <div style="flex:1;font-size:12px;color:#854F0B">Spike Jan 26 (14) → slow decline to Jun (7). Still above baseline of 3–4.</div>
-  </div>
-
-  <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">118 — UNABLE TO FARE — PRICE MANUALLY (60262 / 802)</div><div style="font-size:12px;color:#666">Fare loading failure at Ticket_RebookAndRepricePNR — recurring DL pattern</div></div>
-    <div style="width:70px"><span class="tag tpu">DL</span></div>
-    <div style="width:90px"><span class="st">L1 · Rebook</span></div>
-    <div style="width:80px"><span class="tag ta">🟠 Watch</span></div>
-    <div style="flex:1;font-size:12px;color:#854F0B">Spike Jan 26 (13) → recovered → secondary uptick May (7) → Jun (3). Recurring.</div>
-  </div>
-
-  <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">WARNING: PRICING IMPOSSIBLE code:10162 type:E sub_errors:None</div><div style="font-size:12px;color:#666">Fare pricing engine failure — affects both airlines at different times</div></div>
-    <div style="width:70px"><span class="tag tbo">Both</span></div>
-    <div style="width:90px"><span class="st">L1 · Rebook</span></div>
-    <div style="width:80px"><span class="tag ta">🟠 Chronic</span></div>
-    <div style="flex:1;font-size:12px;color:#854F0B">DL: persistent ~4–8/mo. WN: volatile, spike Apr (11). Different timing per airline.</div>
-  </div>
-
-  <div class="er">
-    <div style="flex:2;min-width:0"><div style="font-size:13px;font-weight:500">SegmentTattooNotFoundInAmadeusItinerary</div><div style="font-size:12px;color:#666">Segment tattoo lookup fails — too many values to unpack in Ticket_RebookAndRepricePNR</div></div>
-    <div style="width:70px"><span class="tag tpu">DL</span></div>
-    <div style="width:90px"><span class="st">L1 · Rebook</span></div>
-    <div style="width:80px"><span class="tag tb">🔵 Monitor</span></div>
-    <div style="flex:1;font-size:12px;color:#185FA5">Only 7 cases in Jun 26. New signal — check Datadog and monitor Jul.</div>
+    <div style="width:80px"><span class="tag tb">🔵 Minor</span></div>
+    <div style="flex:1;font-size:12px;color:#185FA5">Only 5 confirmed cases total. Previously reported as growing to 11/month — that was incorrect.</div>
   </div>
 </div>
 
 <hr>
-<div class="sl">Priority action plan</div>
+<div class="sl">Priority action plan — updated Jun 2026</div>
 <div class="grid2">
-  <div class="pcard p0"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tr">P0 Critical</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Fix MULTIPLE EXCHANGE/ISSUANCE NOT AUTHORIZED</div><div style="font-size:13px;color:#555">Highest sustained DL error all year — 11 to 28/month, never resolved. Root cause in TST/TSM selection logic during DocIssuance_IssueTicket.</div></div>
-  <div class="pcard p0"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tr">P0 Critical</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Diagnose "Ticketing was unsuccessful"</div><div style="font-size:13px;color:#555">Persistent all year, peaks Nov 25 & Jan 26 (17/mo), still 10 in Jun. Generic failure — needs Datadog breakdown to identify sub-causes.</div></div>
-  <div class="pcard p0"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tr">P0 Critical</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Resolve INVALID RV — NO RESIDUAL VALUE</div><div style="font-size:13px;color:#555">Biggest spike in dataset — 32/month Feb & Mar 26. Zero before Jan 26. New exchange calculation failure, now declining but still 12/month.</div></div>
-  <div class="pcard p1"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag ta">P1 High</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Confirm E-ticket 24360 fix</div><div style="font-size:13px;color:#555">Dropped 34→9 in Jun. Was a fix deployed? If yes — validate Jul–Aug. If no — treat as unresolved, 8 months of high volume.</div></div>
-  <div class="pcard p1"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag ta">P1 High</span><span class="tag twn">WN</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Fix WN ETKT unused coupons error</div><div style="font-size:13px;color:#555">Growing all year, peak Apr (11). Main WN semi-auto failure driver. Fix unused coupon inclusion in DocIssuance for WN reissues.</div></div>
-  <div class="pcard p1"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag ta">P1 High</span><span class="tag tbo">Both</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Confirm 866 WN recovery / investigate DL</div><div style="font-size:13px;color:#555">WN 18→5 in Jun — confirm if fix applied. DL still at 9/mo and not recovering — needs separate Amadeus fare availability investigation.</div></div>
-  <div class="pcard p2"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tg">P2 Monitor</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Monitor repricing recovery</div><div style="font-size:13px;color:#555">Peaked Mar (25), declining to Jun (6). Positive trend — monitor Jul–Aug to confirm full resolution.</div></div>
-  <div class="pcard p2"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tg">P2 Monitor</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Monitor Segment Sell & 118</div><div style="font-size:13px;color:#555">Segment Sell slow decline (Jan 14 → Jun 7). Error 118 secondary uptick May (7). Neither fully resolved — watch Jul–Aug.</div></div>
+  <div class="pcard p0"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tr">P0 Critical</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Investigate Session/PNR state error spike (Apr 26: 29)</div><div style="font-size:13px;color:#555">Largest single DL spike in the dataset. Baseline 2–5/mo jumped to 29 in Apr. Declining but still 12 in Jun. Root cause unknown — needs Datadog investigation.</div></div>
+  <div class="pcard p0"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tr">P0 Critical</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Confirm root cause of DL Internal Server Error (ticketing)</div><div style="font-size:13px;color:#555">TDA fails before DocIssuance is called. Feb–Apr spike (peak 17). Appears resolved in May–Jun but no confirmed fix. Root cause is inside TDA — requires Datadog.</div></div>
+  <div class="pcard p0"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tr">P0 Critical</span><span class="tag twn">WN</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Confirm CMC commission resolution (276 cases, 0 since May)</div><div style="font-size:13px;color:#555">Dominant WN error all year — 20–32/mo, now 0 since May. No confirmed fix deployment found. Must confirm what changed and whether it can regress.</div></div>
+  <div class="pcard p0"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tr">P0 Critical</span><span class="tag twn">WN</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Fix WN FINISH OR IGNORE / Pnr parallel process (growing)</div><div style="font-size:13px;color:#555">FINISH OR IGNORE reached 17 in Jun 26. Pnr parallel process growing since Feb 26. Both indicate open sessions not being cleaned up. Root cause unconfirmed.</div></div>
+  <div class="pcard p1"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag ta">P1 High</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Fix MULTIPLE EXCHANGE/ISSUANCE NOT AUTHORIZED</div><div style="font-size:13px;color:#555">Chronic all year, never zero. Low volume but confirmed root cause: TST/TSM selection logic in DocIssuance_IssueTicket. Well understood — fix is actionable.</div></div>
+  <div class="pcard p1"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag ta">P1 High</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Monitor TTM INHIBITED (growing to 10/mo)</div><div style="font-size:13px;color:#555">Intermittent Jun–Dec 25, now growing. May peak: 10, Jun: 3. Amadeus inhibits TTM flag — requires Datadog to identify which PNR state triggers it.</div></div>
+  <div class="pcard p2"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tg">P2 Monitor</span><span class="tag tpu">DL</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Monitor INVALID RV (2 total cases, not a priority)</div><div style="font-size:13px;color:#555">Previously reported as 32/month — actual count is 2 cases total across 13 months. Not a priority issue. Confirm in Datadog if it re-appears.</div></div>
+  <div class="pcard p2"><div style="display:flex;gap:8px;margin-bottom:8px"><span class="tag tg">P2 Monitor</span><span class="tag twn">WN</span></div><div style="font-size:14px;font-weight:500;margin-bottom:4px">Monitor WN ETKT unused coupons (5 total cases, not a priority)</div><div style="font-size:13px;color:#555">Previously reported as growing to 11/month — actual count is 5 cases total. Not a priority issue. Monitor Jul–Aug for re-emergence.</div></div>
 </div>
 
 <hr>
-<div class="sl">Root cause summary</div>
+<div class="sl">Root cause summary — confirmed findings only</div>
 <div class="grid2" style="margin-bottom:2rem">
-  <div class="card"><div style="display:flex;gap:8px;margin-bottom:10px"><span class="tag tpu" style="font-size:13px;padding:4px 12px">Delta DL</span></div><div style="font-size:13px;color:#333;line-height:1.7">DL has <strong>three distinct failure layers</strong> driving the automation drop: (1) Ticketing failures — Multiple Exchange/Issuance and generic ticketing failures chronic all year; (2) Exchange logic — INVALID RV introduced a major spike from Jan 26; (3) Rebook failures — repricing, segment sell, and 118 peaked Dec 25–Mar 26, now improving. <strong>DL is the primary driver.</strong></div></div>
-  <div class="card"><div style="display:flex;gap:8px;margin-bottom:10px"><span class="tag twn" style="font-size:13px;padding:4px 12px">Southwest WN</span></div><div style="font-size:13px;color:#333;line-height:1.7">WN's drop comes from <strong>two distinct problems</strong>: (1) Inventory step — 866 (no fare found) spiked Apr–May 26, appears to be recovering in Jun; (2) Ticketing step — WN ETKT unused coupons error grown steadily all year, main WN semi-auto failure driver. Lower volume than DL but both need attention.</div></div>
+  <div class="card"><div style="display:flex;gap:8px;margin-bottom:10px"><span class="tag tpu" style="font-size:13px;padding:4px 12px">Delta DL</span></div><div style="font-size:13px;color:#333;line-height:1.7">DL failures cluster in the <strong>ticketing step (Step 4)</strong>. Confirmed root causes: (1) <strong>Multiple Exchange/Issuance</strong> — TST/TSM selection error in DocIssuance, chronic all year; (2) <strong>Internal Server Error</strong> — TDA fails before DocIssuance, exact cause requires Datadog; (3) <strong>Session/PNR state errors</strong> — spike Apr 26 to 29, root cause unconfirmed. TTM INHIBITED growing. Rebook-step errors (repricing, segment sell) are outside this scope.</div></div>
+  <div class="card"><div style="display:flex;gap:8px;margin-bottom:10px"><span class="tag twn" style="font-size:13px;padding:4px 12px">Southwest WN</span></div><div style="font-size:13px;color:#333;line-height:1.7">WN's drop was dominated by <strong>CMC RJT: NEED COMMISSION</strong> (276 cases, 20–32/mo, now 0 since May — unconfirmed fix). A new growing cluster of <strong>session/PNR state errors</strong> (FINISH OR IGNORE + Pnr parallel process) is now the main active WN risk. ETKT unused coupons and INVALID RV are minor (5 and 2 cases total respectively — previous estimates were wrong).</div></div>
 </div>
 
 </div>
@@ -189,12 +167,12 @@ const labels=['Jun 25','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar',
 new Chart(document.getElementById('errChart'),{
   type:'line',
   data:{labels,datasets:[
-    {label:'E-ticket 24360 (DL)',data:[null,2,4,8,19,21,20,21,13,20,28,34,9],borderColor:'#7F77DD',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3},
-    {label:'Multiple Exchange (DL)',data:[2,11,13,14,20,12,21,27,20,28,4,23,12],borderColor:'#E24B4A',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[3,3]},
-    {label:'INVALID RV (DL)',data:[null,null,null,null,null,null,null,6,32,32,26,23,12],borderColor:'#BA7517',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[8,3]},
-    {label:'Repricing mismatch (DL)',data:[null,2,6,5,8,3,16,18,13,25,13,8,6],borderColor:'#D85A30',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[6,3]},
-    {label:'Ticketing unsuccessful (DL)',data:[null,7,7,8,15,17,10,17,6,13,16,16,10],borderColor:'#378ADD',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[2,2]},
-    {label:'866 No fare (WN)',data:[8,10,10,9,7,5,6,9,10,7,16,18,5],borderColor:'#1D9E75',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[5,3]}
+    {label:'Session/PNR errors (DL)',data:[2,2,2,5,0,3,2,2,1,14,29,20,12],borderColor:'#E24B4A',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3},
+    {label:'Internal Server Error (DL)',data:[0,0,0,0,0,0,0,0,7,12,17,2,1],borderColor:'#7F77DD',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[3,3]},
+    {label:'TTM INHIBITED (DL)',data:[0,0,1,0,2,0,3,0,2,7,4,10,3],borderColor:'#D85A30',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[6,3]},
+    {label:'Multiple Exchange (DL)',data:[0,0,0,2,0,0,0,1,1,0,2,3,3],borderColor:'#BA7517',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[8,3]},
+    {label:'CMC Commission (WN)',data:[27,20,22,20,29,19,23,32,20,29,4,0,0],borderColor:'#1D9E75',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[5,3]},
+    {label:'Pnr parallel process (WN)',data:[0,0,1,0,1,0,0,2,7,21,16,12,9],borderColor:'#378ADD',backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3,borderDash:[2,2]}
   ]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},scales:{x:{ticks:{font:{size:11},color:'#888',autoSkip:false,maxRotation:45},grid:{color:'rgba(0,0,0,0.05)'}},y:{beginAtZero:true,ticks:{font:{size:11},color:'#888'},grid:{color:'rgba(0,0,0,0.05)'}}}}
 });
